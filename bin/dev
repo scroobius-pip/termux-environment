@@ -1,0 +1,20 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -euo pipefail
+
+name="${1:-$(basename "$PWD")}"
+name="${name//[^A-Za-z0-9_.-]/-}"
+
+if tmux has-session -t "$name" 2>/dev/null; then
+  exec tmux attach -t "$name"
+fi
+
+tmux new-session -d -s "$name" -n shell -c "$PWD"
+tmux new-window -t "$name" -n server -c "$PWD"
+tmux new-window -t "$name" -n codex -c "$PWD"
+
+if command -v codex >/dev/null 2>&1; then
+  tmux send-keys -t "$name:codex" 'codex' C-m
+fi
+
+tmux select-window -t "$name:shell"
+exec tmux attach -t "$name"

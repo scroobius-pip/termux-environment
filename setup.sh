@@ -25,7 +25,7 @@ printf '\n==> Installing pnpm\n'
 npm install -g pnpm@latest
 
 if [ "${SKIP_CODEX:-0}" != "1" ]; then
-  "$(dirname "$0")/scripts/install-codex.sh"
+  bash "$(dirname "$0")/scripts/install-codex.sh"
 else
   printf '\n==> Skipping Codex (SKIP_CODEX=1)\n'
 fi

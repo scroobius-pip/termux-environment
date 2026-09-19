@@ -23,7 +23,7 @@ This repository only configures the coding toolchain. It does **not** configure 
 ```sh
 git clone https://github.com/scroobius-pip/termux-environment.git ~/termux-environment
 cd ~/termux-environment
-./setup.sh
+bash setup.sh
 ```
 
 Then verify the environment:
@@ -94,13 +94,13 @@ npm install -g @mmmbuto/codex-cli-termux@latest
 To skip Codex during initial setup:
 
 ```sh
-SKIP_CODEX=1 ./setup.sh
+SKIP_CODEX=1 bash setup.sh
 ```
 
 To install or reinstall it later:
 
 ```sh
-./scripts/install-codex.sh
+bash scripts/install-codex.sh
 ```
 
 ## Common web workflows

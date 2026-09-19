@@ -1,0 +1,31 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -u
+
+printf 'Android:  '; getprop ro.build.version.release 2>/dev/null || true
+printf 'ABI:      '; getprop ro.product.cpu.abi 2>/dev/null || uname -m
+printf 'Termux:   '; printf '%s\n' "${TERMUX_VERSION:-unknown}"
+
+check() {
+  local cmd="$1"
+  local version_cmd="$2"
+  if command -v "$cmd" >/dev/null 2>&1; then
+    printf '%-9s ' "$cmd:"
+    sh -c "$version_cmd" 2>/dev/null | head -n 1
+  else
+    printf '%-9s MISSING\n' "$cmd:"
+  fi
+}
+
+check git 'git --version'
+check node 'node --version'
+check npm 'npm --version'
+check pnpm 'pnpm --version'
+check python 'python --version'
+check clang 'clang --version'
+check rg 'rg --version'
+check tmux 'tmux -V'
+check nvim 'nvim --version'
+check ssh 'ssh -V'
+check codex 'codex --version'
+
+printf '\nProject directory: %s\n' "$HOME/code"
